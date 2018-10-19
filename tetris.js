@@ -35,43 +35,50 @@ function createPiece(type) {
       [1,1,1],
       [0,1,0],
     ];
-  } else if(type === 'O') {
-    [
+  }
+  if(type === 'O') {
+    return [
       [1,1],
       [1,1],
     ];
-  } else if(type === 'L') {
-    [
+  }
+  if(type === 'L') {
+    return [
       [0,1,0],
       [0,1,0],
       [0,1,1],
     ];
-  } else if(type === 'J') {
-    [
+  }
+  if(type === 'J') {
+    return [
       [0,1,0],
       [0,1,0],
       [1,1,0],
     ];
-  } else if(type === 'I') {
-    [
+  }
+  if(type === 'I') {
+    return [
       [0,1,0,0],
       [0,1,0,0],
       [0,1,0,0],
-      [0,1,0,0]
+      [0,1,0,0],
     ];
-  } else if(type === 'S') {
-    [
+  }
+  if(type === 'S') {
+    return [
       [0,1,1],
       [1,1,0],
       [0,0,0],
     ];
-  } else if(type === 'Z') {
-    [
+  }
+  if(type === 'Z') {
+    return [
       [1,1,0],
       [0,1,1],
       [0,0,0],
     ];
   }
+
 }
 
 
@@ -111,7 +118,7 @@ function playerDrop() {
   if(collide(arena,player)) {
     player.pos.y--;
     merge(arena,player);
-    player.pos.y = 0;
+    playerReset();
   }
   dropCounter = 0;
 }
@@ -121,6 +128,13 @@ function playerMove(dir) {
   if(collide(arena,player)) {
     player.pos.x -= dir;
   }
+}
+
+function playerReset() {
+  const pieces = 'ILJOTSZ';
+  player.matrix = createPiece(pieces[pieces.length * Math.random() | 0]);
+  player.pos.y = 0;
+  player.pos.x = (arena[0].length / 2 | 0) - (player.matrix[0].length / 2 | 0);
 }
 
 function playerRotate(dir) {
