@@ -5,11 +5,6 @@ context.scale(20,20);
 
 
 
-const matrix = [
-  [0,0,0],
-  [1,1,1],
-  [0,1,0],
-];
 
 function collide(arena,player) {
   const [m,o] = [player.matrix,player.pos];
@@ -31,6 +26,52 @@ function createMatrix(w,h) {
     matrix.push(new Array(w).fill(0))
   }
   return matrix;
+}
+
+function createPiece(type) {
+  if(type === "T") {
+    return [
+      [0,0,0],
+      [1,1,1],
+      [0,1,0],
+    ];
+  } else if(type === 'O') {
+    [
+      [1,1],
+      [1,1],
+    ];
+  } else if(type === 'L') {
+    [
+      [0,1,0],
+      [0,1,0],
+      [0,1,1],
+    ];
+  } else if(type === 'J') {
+    [
+      [0,1,0],
+      [0,1,0],
+      [1,1,0],
+    ];
+  } else if(type === 'I') {
+    [
+      [0,1,0,0],
+      [0,1,0,0],
+      [0,1,0,0],
+      [0,1,0,0]
+    ];
+  } else if(type === 'S') {
+    [
+      [0,1,1],
+      [1,1,0],
+      [0,0,0],
+    ];
+  } else if(type === 'Z') {
+    [
+      [1,1,0],
+      [0,1,1],
+      [0,0,0],
+    ];
+  }
 }
 
 
@@ -136,7 +177,7 @@ const arena = createMatrix(12,20);
 
 const player = {
   pos: {x: 5, y: 5},
-  matrix: matrix,
+  matrix: createPiece('T'),
 }
 
 document.addEventListener('keydown', event => {
